@@ -15,12 +15,16 @@ start = arrow.now().floor('day')
 # Pegar a última hora do dia
 end = arrow.now().ceil('day')
 
+latitude = input("Digite a Latitude e Longitude separadas por ponto e vírgula: ")
+
+longitude = latitude.split(";")
+
 #Fazendo a requisição
 response = req.get(
     'https://api.stormglass.io/v2/weather/point',
     params={
-        'lat': -22.9035, 
-        'lng': -43.2096,
+        'lat': latitude, 
+        'lng': longitude,
         'params': 'airTemperature,cloudCover',
         'start': start.to('UTC').timestamp(),
         'end': end.to('UTC').timestamp() 
