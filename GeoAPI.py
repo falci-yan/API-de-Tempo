@@ -5,3 +5,5 @@ def get_location(address):
     location = geolocator.geocode(address)
 
     return location.latitude, location.longitude
+
+print(get_location("Campo Grande, RJ"))

@@ -1,19 +1,20 @@
 import requests as req
-import json as js
+import json
 import arrow
 from geopy.geocoders import Nominatim
 
-#Função para pegar a localização baseada na região que você definir
+#Função para registrar o endereço e retornar a latitude e longitude
+def get_location(address):
+    geolocator = Nominatim(user_agent="geoapi")
+    location = geolocator.geocode(address)
 
-loc = input("Informe sua localização: ")
+    return location.latitude, location.longitude
 
-geolocator = Nominatim(user_agent="geoapi")
-location = geolocator.geocode(loc)
+#Pegando o endereço do usuário
+loc = input("Informe o endereço desejado: ")
 
-latitude = location.latitude
-longitude = location.longitude
-
-
+#Pegando a latitude e longitude usando a função
+latitude, longitude = get_location(loc)
 
 #Crie um arquivo chamado hash_api.txt e coloque a chave da API dentro dele
 file = open('weather_hash_api.txt', 'r')
@@ -46,5 +47,6 @@ json_data = response.json()
 #Printando o JSON com os resultados
 print(json_data)
 
+#Fechando o arquivo
 file.close()
 
