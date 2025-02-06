@@ -1,10 +1,22 @@
 import requests as req
 import json as js
 import arrow
+from geopy.geocoders import Nominatim
+
+#Função para pegar a localização baseada na região que você definir
+
+loc = input("Informe sua localização: ")
+
+geolocator = Nominatim(user_agent="geoapi")
+location = geolocator.geocode(loc)
+
+latitude = location.latitude
+longitude = location.longitude
+
 
 
 #Crie um arquivo chamado hash_api.txt e coloque a chave da API dentro dele
-file = open('hash_api.txt', 'r')
+file = open('weather_hash_api.txt', 'r')
 
 #Lendo o arquivo
 content = file.read()
@@ -14,10 +26,6 @@ start = arrow.now().floor('day')
 
 # Pegar a última hora do dia
 end = arrow.now().ceil('day')
-
-latitude = input("Digite a Latitude e Longitude separadas por ponto e vírgula: ")
-
-longitude = latitude.split(";")
 
 #Fazendo a requisição
 response = req.get(
